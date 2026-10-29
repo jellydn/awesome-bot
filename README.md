@@ -17,7 +17,7 @@ Curated research on affordable, self-hostable autonomous AI assistants as altern
 | --- | --- | --- | --- | --- | --- | --- |
 | [Grok Bot](https://docs.x.ai/grok-bot/overview) | Managed | App workflows | App/browser workflows | Repo workflows | Unverified | Paid reference baseline |
 | [Rakazo](https://rakazo.com/) | Self-host claims require validation | Unverified | Unverified | Unverified | Unverified | Investigate |
-| [MausBot](https://mausbot.com/pricing) | Desktop / optional cloud (verify) | Advertised | Advertised | Advertised | Unverified | **POC candidate** |
+| [OpenMausBot / MausBot](https://github.com/milind-soni/OpenMausBot) | Desktop / VPS / Docker | Composio | Composio | Composio | Custom MCP; unverified | **Top POC candidate** |
 | [OpenBot](https://www.copilotkit.ai/openbot) ([source](https://github.com/CopilotKit/openbot)) | Self-hostable | Custom MCP/tools | Custom MCP/tools | Custom MCP/tools | Custom MCP/tools | Platform candidate |
 | [OpenHuman](https://tinyhumans.ai/openhuman) | Local-first (verify daemon hosting) | Advertised | Advertised | Advertised | MCP path to validate | **POC candidate** |
 
@@ -31,8 +31,8 @@ Persistent cloud computer, automation, and approval workflows. Check whether an 
 ### Rakazo
 Verify upstream repository, license, deployment instructions, active maintenance, and each connector before making capability claims.
 
-### MausBot
-Promising candidate for advertised Slack, Gmail and GitHub integrations. Verify whether Slack integration means reading Slack data or operating as a Slack bot, and whether third-party connector costs apply. Confirm current checkout pricing.
+### OpenMausBot / MausBot
+Canonical upstream: https://github.com/milind-soni/OpenMausBot (formerly OpenGrokBot). Apache-2.0 open-source core; `enterprise/` has separate source-available terms. Supports Codex/Claude/Grok CLIs, self-hosted VPS deployment, schedules, webhooks, phone pairing, MCP and Composio for Slack, Gmail and GitHub. Sentry remains unverified; test custom MCP. Composio and optional Boat cloud computers may add costs. See [detailed review](projects/openmausbot.md).
 
 ### OpenBot
 Customizable agent platform with MCP-oriented tools and self-hosted architecture. Expect integration engineering; do not assume native connectors for the four required services.
