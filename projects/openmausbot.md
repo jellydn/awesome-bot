@@ -2,10 +2,10 @@
 
 - Canonical repository: https://github.com/milind-soni/OpenMausBot
 - Website: https://www.openmausbot.com/
-- Reviewed: 2026-10-29
+- Reviewed: 2026-10-29. Hands-on on macOS on 2026-10-30.
 - Repository: ~6.7k stars at review time
 - License: Apache-2.0 for open-source core; enterprise/ has separate source-available license
-- Status: **Top POC candidate** for replacing paid Grok Bot
+- Status: **Current trial**. The local web app is acceptable so far.
 
 ## Architecture
 Electron/React/Vite frontend, local harness server, Codex/Claude/Grok CLI drivers, SSE events, permission broker, Composio connected apps, optional Boat cloud computer. Local state in `~/.openmausbot`.
@@ -30,6 +30,19 @@ Electron/React/Vite frontend, local harness server, Codex/Claude/Grok CLI driver
 - API keys are stored in local config; upstream documentation states they are plaintext with Unix file mode 0600. Encrypt volumes and restrict host access.
 - Use a dedicated Composio project, minimum OAuth scopes, and read-only integrations initially.
 - Check license of enterprise/ separately.
+
+## Hands-on
+Cloned with `try` on macOS on 2026-10-30 into `2026-10-30-milind-soni-OpenMausBot`. The checkout was `openmausbot@0.1.134` at `7b9dd52c4`. Electron stays off.
+
+- `pnpm dev:server` runs the harness on `http://127.0.0.1:8799`. `pnpm dev` runs the Vite UI on `http://127.0.0.1:5199`.
+- A local `justfile` in that checkout provides `just up`. `just serve` starts the harness and the UI when those ports are down. `just tunnel` then runs `cloudflared tunnel run --url http://127.0.0.1:5199 bot`. The public name is https://bot.itman.fyi/.
+- `just serve` sets `OMB_PUBLIC_URL=https://bot.itman.fyi` for a harness it starts. The harness reads that value at start, and pairing links then use the public name.
+- Vite allows `bot.itman.fyi` through `__VITE_ADDITIONAL_SERVER_ALLOWED_HOSTS`. Other host names stay blocked.
+- The tunnel forwards the browser `Host` and `X-Forwarded-Proto`. Do not pass `--http-host-header 127.0.0.1:5199`. That rewrite makes `Origin: https://bot.itman.fyi` fail the same-origin check with `forbidden: cross-origin request`.
+- A browser on `http://127.0.0.1:5199` is the owner while `OMB_DEV_TRUST_LOCAL_BROWSER=1`. A browser on https://bot.itman.fyi/ must pair. Create the code on the local page under Settings → Remote access, then enter it on the public page. A request from another site stays forbidden.
+- The server warned that agent-browser 0.41.0 is not the pinned 0.37.0. Browser tools can stall until 0.37.0 is installed.
+
+Slack, Gmail, GitHub, and Sentry were not completed in this run.
 
 ## POC
 1. Run on Mac with existing Codex CLI.
