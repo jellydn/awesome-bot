@@ -2,7 +2,7 @@
 
 Curated research on affordable, self-hostable autonomous AI assistants as alternatives to Grok Bot, prioritizing **Slack, Gmail, GitHub, and Sentry**.
 
-> Research snapshot: 2026-10-30. Rakazo and OpenBot.run were tried on macOS. Rakazo is not the next install. OpenBot.run runs on a ChatGPT plan and does not enforce per-action approval. Sentry support is unverified for all candidates.
+> Research snapshot: 2026-10-30. Rakazo, OpenBot.run, and OpenMausBot were tried on macOS. Rakazo is not the next install. OpenBot.run runs on a ChatGPT plan and does not enforce per-action approval. OpenMausBot is the current trial. Sentry support is unverified for all candidates.
 
 ## Requirements
 
@@ -17,7 +17,7 @@ Curated research on affordable, self-hostable autonomous AI assistants as altern
 | --- | --- | --- | --- | --- | --- | --- |
 | [Grok Bot](https://docs.x.ai/grok-bot/overview) | Managed | App workflows | App/browser workflows | Repo workflows | Unverified | Paid reference baseline |
 | [Rakazo](https://rakazo.com/) | Hosted from $10/month. Desktop v0.3.5 local install failed | Unverified | Unverified | Unverified | Unverified | Tested, not selected |
-| [OpenMausBot / MausBot](https://github.com/milind-soni/OpenMausBot) | Desktop / VPS / Docker | Composio | Composio | Composio | Custom MCP; unverified | **Top POC candidate** |
+| [OpenMausBot / MausBot](https://github.com/milind-soni/OpenMausBot) | Desktop / VPS / Docker | Composio | Composio | Composio | Custom MCP; unverified | **Current trial** |
 | [OpenBot](https://www.copilotkit.ai/openbot) ([source](https://github.com/CopilotKit/openbot)) | Self-hostable | Custom MCP/tools | Custom MCP/tools | Custom MCP/tools | Custom MCP/tools | Platform candidate |
 | [OpenHuman](https://tinyhumans.ai/openhuman) | Local-first (verify daemon hosting) | Advertised | Advertised | Advertised | MCP path to validate | **POC candidate** |
 | [OpenBot.run](https://openbot.run/) ([source](https://github.com/nightly-labs/openbot)) | Desktop local-first | Unverified | Unverified | Unverified | Unverified | Tried locally |
@@ -39,10 +39,12 @@ The source repo is Apache-2.0 and active. The hosted onboarding at `app.rakazo.c
 Connecting Twitter returns Composio HTTP 400 `ToolRouterV2_NoManagedAuth` (code 4308): Composio does not manage auth for that toolkit, and the app shows the raw JSON. Filed as [elie222/rakazo#2415](https://github.com/elie222/rakazo/issues/2415). Slack, Gmail, GitHub, and Sentry were not connected in this trial.
 
 ### OpenMausBot / MausBot
-Canonical upstream: https://github.com/milind-soni/OpenMausBot (formerly OpenGrokBot). Apache-2.0 open-source core; `enterprise/` has separate source-available terms. Supports Codex/Claude/Grok CLIs, self-hosted VPS deployment, schedules, webhooks, phone pairing, MCP and Composio for Slack, Gmail and GitHub. Sentry remains unverified; test custom MCP. Composio and optional Boat cloud computers may add costs. See [detailed review](projects/openmausbot.md).
+Canonical upstream: https://github.com/milind-soni/OpenMausBot (formerly OpenGrokBot). Apache-2.0 open-source core; `enterprise/` has separate source-available terms. Supports Codex/Claude/Grok CLIs, self-hosted VPS deployment, schedules, webhooks, phone pairing, MCP and Composio for Slack, Gmail and GitHub. Sentry remains unverified; test custom MCP. Composio and optional Boat cloud computers may add costs.
+
+Tried on macOS on 2026-10-30 at `openmausbot@0.1.134` (`7b9dd52c4`). Keep this app. The web UI and harness are acceptable so far, and Electron stays off. `just up` in the try checkout starts both, then opens the Cloudflare tunnel `bot`. The public name is https://bot.itman.fyi/. The tunnel forwards the browser `Host`. A remote browser pairs before it can call the API. Slack, Gmail, GitHub, and Sentry were not completed in this run. See [detailed review](projects/openmausbot.md).
 
 ### OpenBot
-Next install. MIT-licensed template you clone and run. An administrator supplies the model key. Tool calls go through a gateway that writes an audit row before the call. Expect to add Slack, Gmail, GitHub, and Sentry as MCP tools. Composio is also in its catalog, so do not use that path for Twitter. The local routine worker starts from `scripts/start.sh`. A one-container image does not fire routines unless a worker is added. Self-hosted memory needs CopilotKit Intelligence. The free Developer plan covers a local Mac preview.
+Platform candidate. This is not the current trial. MIT-licensed template you clone and run. An administrator supplies the model key. Tool calls go through a gateway that writes an audit row before the call. Expect to add Slack, Gmail, GitHub, and Sentry as MCP tools. Composio is also in its catalog, so do not use that path for Twitter. The local routine worker starts from `scripts/start.sh`. A one-container image does not fire routines unless a worker is added. Self-hosted memory needs CopilotKit Intelligence. The free Developer plan covers a local Mac preview.
 
 ### OpenHuman
 Promising memory-oriented personal assistant with advertised Slack, Gmail, GitHub and MCP support. Verify headless/server operation, source license, and exact permissions.
