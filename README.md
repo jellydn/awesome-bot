@@ -2,7 +2,7 @@
 
 Curated research on affordable, self-hostable autonomous AI assistants as alternatives to Grok Bot, prioritizing **Slack, Gmail, GitHub, and Sentry**.
 
-> Research snapshot: 2026-10-30. Rakazo, OpenBot.run, and OpenMausBot were tried on macOS. Rakazo is not the next install. OpenBot.run runs on a ChatGPT plan and does not enforce per-action approval. OpenMausBot is the current trial. Sentry support is unverified for all candidates.
+> Research snapshot: 2026-11-01. Rakazo, OpenBot.run, OpenMausBot, and OpenHuman were tried on macOS. Rakazo is not the next install. OpenBot.run runs on a ChatGPT plan and does not enforce per-action approval. OpenMausBot is the current trial. The TinyHumans Free plan is not an OpenHuman option. Sentry support is unverified for all candidates.
 
 ## Requirements
 
@@ -19,7 +19,7 @@ Curated research on affordable, self-hostable autonomous AI assistants as altern
 | [Rakazo](https://rakazo.com/) | Hosted from $10/month. Desktop v0.3.5 local install failed | Unverified | Unverified | Unverified | Unverified | Tested, not selected |
 | [OpenMausBot / MausBot](https://github.com/milind-soni/OpenMausBot) | Desktop / VPS / Docker | Composio | Composio | Composio | Custom MCP; unverified | **Current trial** |
 | [OpenBot](https://www.copilotkit.ai/openbot) ([source](https://github.com/CopilotKit/openbot)) | Self-hostable | Custom MCP/tools | Custom MCP/tools | Custom MCP/tools | Custom MCP/tools | Platform candidate |
-| [OpenHuman](https://tinyhumans.ai/openhuman) | Local-first (verify daemon hosting) | Advertised | Advertised | Advertised | MCP path to validate | **POC candidate** |
+| [OpenHuman](https://tinyhumans.ai/openhuman) | Local core. Hosted memory from $20/month | Advertised | Advertised | Advertised | MCP path to validate | **Tried; Free plan dropped** |
 | [OpenBot.run](https://openbot.run/) ([source](https://github.com/nightly-labs/openbot)) | Desktop local-first | Unverified | Unverified | Unverified | Unverified | Tried locally |
 
 **Important:** An advertised integration is not proof of production-ready OAuth scopes, bidirectional actions, or unattended execution.
@@ -47,7 +47,9 @@ Tried on macOS on 2026-10-30 at `openmausbot@0.1.134` (`7b9dd52c4`). Keep this a
 Platform candidate. This is not the current trial. MIT-licensed template you clone and run. An administrator supplies the model key. Tool calls go through a gateway that writes an audit row before the call. Expect to add Slack, Gmail, GitHub, and Sentry as MCP tools. Composio is also in its catalog, so do not use that path for Twitter. The local routine worker starts from `scripts/start.sh`. A one-container image does not fire routines unless a worker is added. Self-hosted memory needs CopilotKit Intelligence. The free Developer plan covers a local Mac preview.
 
 ### OpenHuman
-Promising memory-oriented personal assistant with advertised Slack, Gmail, GitHub and MCP support. Verify headless/server operation, source license, and exact permissions.
+Tried on macOS from 2026-10-31 through 2026-11-01 at release `v0.64.20`. GPL-3.0-only. The web UI runs with the Tauri app off. Advertised Slack, Gmail, GitHub, and an MCP path for Sentry were not connected in this run. See [detailed review](projects/openhuman.md).
+
+Drop the TinyHumans **Free** plan. The signed-in plans page shows **No active subscription**, and `memory/scopes` on `api.tinyhumans.ai` returns `MEMORY_PLAN_REQUIRED` (HTTP 403). Hosted memory starts at **Basic, $20/month** (1 GB and $21 of credits) or **Pro, $200/month** (20 GB and $210 of credits). "Free memory inference" on those cards is inference on the paid plan. The page says subscription payments and credit purchases are non-refundable.
 
 ### OpenBot.run
 Distinct from CopilotKit OpenBot. Local desktop app that uses an existing Codex or Claude login, including a ChatGPT plan. Tried on macOS on 2026-10-27: Codex CLI 0.164.0 was signed in as ChatGPT (`prolite`) and the provider became available. Development requires Bun 1.4.2. The license is PolyForm Noncommercial 1.0.0. Agents run with `danger-full-access` and `approvalPolicy: never`, so this does not meet the approval rule. Slack, Gmail, GitHub, and Sentry were not connected. See [detailed review](projects/openbot-run.md).
